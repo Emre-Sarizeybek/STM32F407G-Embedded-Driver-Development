@@ -150,10 +150,17 @@ typedef struct{
 #define GPIOJ_PCLK_DI() (RCC->AHB1ENR &= ~(1 << 9))
 #define GPIOK_PCLK_DI() (RCC->AHB1ENR &= ~(1 << 10))
 
+/*
+ * Some Generic Macros
+ */
+#define ENABLE  (1)
+#define DISABLE (0)
+#define SET     ENABLE
+#define RESET   DISABLE
 
 
 
-
+#include "stm32f407xx_gpio.h"
 
 
 
