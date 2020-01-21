@@ -8,6 +8,9 @@
 #ifndef INC_STM32F407XX_H_
 #define INC_STM32F407XX_H_
 
+#include <stdint.h>
+#define  __vo volatile
+
 /*
  * Base Addresses of Flash, SRAM and ROM Memories
  */
@@ -43,5 +46,35 @@
 #define GPIOJ_BASEADDR    (AHB1PERIPH_BASE + 0x2400U) /* This is GPIOJ base address of STM32F407xx */
 #define GPIOK_BASEADDR    (AHB1PERIPH_BASE + 0x2800U) /* This is GPIOK base address of STM32F407xx */
 #define RCC_BASEADDR      (AHB1PERIPH_BASE + 0x3800U) /* This is RCC   base address of STM32F407xx */
+
+/********************* Peripheral Register Definition Structures *********************/
+
+/*
+ * Peripheral Register Definition Structure for GPIO
+ */
+typedef struct{
+	 __vo uint32_t MODER;   /* GPIO port mode register                      Address offset: 0x00 */
+	 __vo uint32_t OTYPER;  /* GPIO port output type register               Address offset: 0x04 */
+	 __vo uint32_t OSPEEDR; /* GPIO port output speed register              Address offset: 0x08 */
+	 __vo uint32_t PUPDR;   /* GPIO port pull-up/pull-down register         Address offset: 0x0C */
+	 __vo uint32_t IDR;     /* GPIO port input data register                Address offset: 0x10 */
+	 __vo uint32_t ODR;     /* GPIO port output data register               Address offset: 0x14 */
+	 __vo uint32_t BSRR;    /* GPIO port bit set/reset register             Address offset: 0x18 */
+	 __vo uint32_t LCKR;    /* GPIO port configuration lock register        Address offset: 0x1C */
+	 __vo uint32_t AFR[2];  /* AFR[0]: GPIO alternate function low register Address offset: 0x20 ,  AFR[1]: GPIO alternate function high register Address offset: 0x24 */
+}GPIO_RegDef_t;
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #endif /* INC_STM32F407XX_H_ */
