@@ -106,4 +106,10 @@ typedef struct{
 void GPIO_PeriClockControl(GPIO_RegDef_t *pGPIOx, uint8_t EnorDi);
 
 
+/*
+ * This is a GPIO initial function for GPIO pins
+ */
+void GPIO_Init(GPIO_Handle_t *pGPIOHandle);
+
+
 #endif /* INC_STM32F407XX_GPIO_H_ */
