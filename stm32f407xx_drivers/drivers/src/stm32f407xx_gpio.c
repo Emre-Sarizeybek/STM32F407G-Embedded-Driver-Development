@@ -180,3 +180,15 @@ void GPIO_DeInit(GPIO_RegDef_t *pGPIOx){
 		}
 }
 
+
+/************************************************************************************************************
+ * @fn                     : GPIO_ToggleOutputPin
+ * @brief                  : This function toggles GPIOx pin state
+ * @param1[in]             : Base address of GPIO_RegDef_t structure
+ * @param2[in]             : Pin number of GPIOx
+ * @return                 : None
+ ************************************************************************************************************/
+void GPIO_ToggleOutputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber){
+
+	pGPIOx->ODR ^=  (1 << PinNumber);
+}

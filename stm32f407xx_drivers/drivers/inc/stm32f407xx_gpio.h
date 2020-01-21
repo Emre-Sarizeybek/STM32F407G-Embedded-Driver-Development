@@ -112,4 +112,23 @@ void GPIO_PeriClockControl(GPIO_RegDef_t *pGPIOx, uint8_t EnorDi);
 void GPIO_Init(GPIO_Handle_t *pGPIOHandle);
 
 
+/*
+ * This is a GPIO De-Init function for GPIO ports
+ */
+void GPIO_DeInit(GPIO_RegDef_t *pGPIOx);
+
+
+/*
+ * This function toggles output GPIO pin state
+ */
+void GPIO_ToggleOutputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber);
+
+
+
+
+
+
+
+
+
 #endif /* INC_STM32F407XX_GPIO_H_ */
