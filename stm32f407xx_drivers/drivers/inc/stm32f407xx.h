@@ -47,6 +47,14 @@
 #define GPIOK_BASEADDR    (AHB1PERIPH_BASE + 0x2800U) /* This is GPIOK base address of STM32F407xx */
 #define RCC_BASEADDR      (AHB1PERIPH_BASE + 0x3800U) /* This is RCC   base address of STM32F407xx */
 
+
+/*
+ * Base Addresses of Peripherals which Are Hanging on APB2 Bus
+ */
+#define EXTI_BASEADDR    (APB2PERIPH_BASE + 0x3C00) /* This is the EXTI base address of STM32F407xx   */
+#define SYSCFG_BASEADDR  (APB2PERIPH_BASE + 0x3800) /* This is the SYSCFG base address of STM32F407xx */
+
+
 /********************* Peripheral Register Definition Structures *********************/
 
 /*
