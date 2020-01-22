@@ -53,7 +53,6 @@ void GPIO_ButtonInit(void){
 	GPIO_Button.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_0;    /* GPIO pin no           */
 	GPIO_Button.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;   /* GPIO pin speed        */
 	GPIO_Button.GPIO_PinConfig.GPIO_PinPuPdControl = GPIO_PIN_PD; /* GPIO pin PuPd control */
-	GPIO_Button.GPIO_PinConfig.GPIO_PinOPType = GPIO_OP_TYPE_PP;  /* GPIO pin output type  */
 	GPIO_Init(&GPIO_Button);
 }
 

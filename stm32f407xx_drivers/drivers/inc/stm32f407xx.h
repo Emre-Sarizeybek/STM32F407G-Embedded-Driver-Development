@@ -11,6 +11,33 @@
 #include <stdint.h>
 #define  __vo volatile
 
+/****************************** START: Processor Specific Details ******************************/
+
+
+/*
+ * ARM Cortex Mx Processor NVIC ISERx Register Addresses
+ */
+#define NVIC_ISER0 ( (__vo uint32_t*)0xE000E100 )
+#define NVIC_ISER1 ( (__vo uint32_t*)0xE000E104 )
+#define NVIC_ISER2 ( (__vo uint32_t*)0xE000E108 )
+#define NVIC_ISER3 ( (__vo uint32_t*)0xE000E10C )
+
+
+/*
+ * ARM Cortex Mx Processor NVIC ICERx Register Addresses
+ */
+#define NVIC_ICER0 ( (__vo uint32_t*)0XE000E180 )
+#define NVIC_ICER1 ( (__vo uint32_t*)0XE000E184 )
+#define NVIC_ICER2 ( (__vo uint32_t*)0XE000E188 )
+#define NVIC_ICER3 ( (__vo uint32_t*)0XE000E18C )
+
+/*
+ * ARM Cortex Mx Processor Priority Register Addresses Calculation
+ */
+#define NVIC_PR_BASE_ADDR ( (__vo uint32_t*)0xE000E400 )
+#define NO_PR_BITS_IMPLEMENTED 4
+
+
 /*
  * Base Addresses of Flash, SRAM and ROM Memories
  */
@@ -140,19 +167,20 @@ typedef struct{
 /*
  * Peripheral Definitions Macros
  */
-#define GPIOA ((GPIO_RegDef_t*)GPIOA_BASEADDR)
-#define GPIOB ((GPIO_RegDef_t*)GPIOB_BASEADDR)
-#define GPIOC ((GPIO_RegDef_t*)GPIOC_BASEADDR)
-#define GPIOD ((GPIO_RegDef_t*)GPIOD_BASEADDR)
-#define GPIOE ((GPIO_RegDef_t*)GPIOE_BASEADDR)
-#define GPIOF ((GPIO_RegDef_t*)GPIOF_BASEADDR)
-#define GPIOG ((GPIO_RegDef_t*)GPIOG_BASEADDR)
-#define GPIOH ((GPIO_RegDef_t*)GPIOH_BASEADDR)
-#define GPIOI ((GPIO_RegDef_t*)GPIOI_BASEADDR)
-#define GPIOJ ((GPIO_RegDef_t*)GPIOJ_BASEADDR)
-#define GPIOK ((GPIO_RegDef_t*)GPIOK_BASEADDR)
-#define RCC   ((RCC_RegDef_t*)RCC_BASEADDR)
-
+#define GPIOA  ((GPIO_RegDef_t*)GPIOA_BASEADDR)
+#define GPIOB  ((GPIO_RegDef_t*)GPIOB_BASEADDR)
+#define GPIOC  ((GPIO_RegDef_t*)GPIOC_BASEADDR)
+#define GPIOD  ((GPIO_RegDef_t*)GPIOD_BASEADDR)
+#define GPIOE  ((GPIO_RegDef_t*)GPIOE_BASEADDR)
+#define GPIOF  ((GPIO_RegDef_t*)GPIOF_BASEADDR)
+#define GPIOG  ((GPIO_RegDef_t*)GPIOG_BASEADDR)
+#define GPIOH  ((GPIO_RegDef_t*)GPIOH_BASEADDR)
+#define GPIOI  ((GPIO_RegDef_t*)GPIOI_BASEADDR)
+#define GPIOJ  ((GPIO_RegDef_t*)GPIOJ_BASEADDR)
+#define GPIOK  ((GPIO_RegDef_t*)GPIOK_BASEADDR)
+#define RCC    ((RCC_RegDef_t*)RCC_BASEADDR)
+#define EXTI   ((EXTI_RegDef_t*)EXTI_BASEADDR)
+#define SYSCFG ((SYSCFG_RegDef_t*)SYSCFG_BASEADDR)
 
 /*
  * Clock Enable Macros for GPIOx Peripherals
@@ -169,6 +197,11 @@ typedef struct{
 #define GPIOJ_PCLK_EN() (RCC->AHB1ENR |= (1 << 9))
 #define GPIOK_PCLK_EN() (RCC->AHB1ENR |= (1 << 10))
 
+/*
+ * Clock Enable Macros for SYSCFG peripheral
+ */
+#define SYSCFG_PCLK_EN() (RCC->APB2ENR |= (1 << 14))
+
 
 /*
  * Clock Disable Macros for GPIOx Peripherals
@@ -184,6 +217,13 @@ typedef struct{
 #define GPIOI_PCLK_DI() (RCC->AHB1ENR &= ~(1 << 8))
 #define GPIOJ_PCLK_DI() (RCC->AHB1ENR &= ~(1 << 9))
 #define GPIOK_PCLK_DI() (RCC->AHB1ENR &= ~(1 << 10))
+
+
+/*
+ * Clock Disable Macros for SYSCFG peripheral
+ */
+#define SYSCFG_PCLK_DI() (RCC->APB2ENR &= ~(1 << 14))
+
 
 /*
  * Some Generic Macros
@@ -212,10 +252,50 @@ typedef struct{
 #define GPIOK_REG_RESET()  do{(RCC->AHB1RSTR |= (1 << 10)); (RCC->AHB1RSTR &= ~(1 << 10));}while(0)
 
 
+/*
+ * This macro returns a code (between 0 to 7) for a given GPIO base address(x)
+ */
+#define GPIO_BASEADDR_TO_CODE(x) ((x == GPIOA) ? 0 :\
+		                          (x == GPIOB) ? 1 :\
+		                          (x == GPIOC) ? 2 :\
+		                          (x == GPIOD) ? 3 :\
+		                          (x == GPIOE) ? 4 :\
+		                          (x == GPIOF) ? 5 :\
+		                          (x == GPIOG) ? 6 :\
+		                          (x == GPIOH) ? 7 : 0)
 
 
+/*
+ * IRQ (Interrupt Request) Numbers of STM32F407x MCU
+ */
+#define IRQ_NO_EXTI0      6
+#define IRQ_NO_EXTI1      7
+#define IRQ_NO_EXTI2      8
+#define IRQ_NO_EXTI3      9
+#define IRQ_NO_EXTI4     10
+#define IRQ_NO_EXT9_5    23
+#define IRQ_NO_EXT10_15  40
 
 
+/*
+ * Macros for all the possible priority levels
+ */
+#define NVIC_IRQ_PRI0   0
+#define NVIC_IRQ_PRI1   1
+#define NVIC_IRQ_PRI2   2
+#define NVIC_IRQ_PRI3   3
+#define NVIC_IRQ_PRI4   4
+#define NVIC_IRQ_PRI5   5
+#define NVIC_IRQ_PRI6   6
+#define NVIC_IRQ_PRI7   7
+#define NVIC_IRQ_PRI8   8
+#define NVIC_IRQ_PRI9   9
+#define NVIC_IRQ_PRI10 10
+#define NVIC_IRQ_PRI11 11
+#define NVIC_IRQ_PRI12 12
+#define NVIC_IRQ_PRI13 13
+#define NVIC_IRQ_PRI14 14
+#define NVIC_IRQ_PRI15 15
 
 
 

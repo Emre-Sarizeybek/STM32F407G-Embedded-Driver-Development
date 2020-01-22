@@ -57,12 +57,12 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
-					<fileInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.debug.86303437.937634203" name="led_toggle.c" rcbsApplicability="disable" resourcePath="src/led_toggle.c" toolsToInvoke="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.956163074.1985858795">
-						<tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.956163074.1985858795" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.956163074"/>
+					<fileInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.debug.86303437.3750569" name="led_button.c" rcbsApplicability="disable" resourcePath="src/led_button.c" toolsToInvoke="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.956163074.1439955370">
+						<tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.956163074.1439955370" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.956163074"/>
 					</fileInfo>
 					<sourceEntries>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="drivers"/>
-						<entry excluding="led_toggle.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
+						<entry excluding="led_button.c|led_toggle.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="startup"/>
 					</sourceEntries>
 				</configuration>

@@ -129,7 +129,18 @@ void GPIO_ToggleOutputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber);
 uint8_t GPIO_ReadFromInputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber);
 
 
+/*
+ * This function reads input port state
+ */
+uint16_t GPIO_ReadFromInputPort(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber);
 
+
+/*
+ *  IRQ Configuration and ISR handling
+ */
+void GPIO_IRQInterruptConfig(uint8_t IRQNumber , uint8_t EnOrDi);
+void GPIO_IRQPriorityConfig(uint8_t IRQNumber,uint32_t IRQPriority);
+void GPIO_IRQHandling(uint8_t PinNumber);
 
 
 
