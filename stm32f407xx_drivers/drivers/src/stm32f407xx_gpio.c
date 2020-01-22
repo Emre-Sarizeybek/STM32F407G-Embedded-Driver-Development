@@ -200,12 +200,25 @@ void GPIO_ToggleOutputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber){
  * @brief                  : This function reads input pin state
  * @param1[in]             : Base address of GPIO_RegDef_t structure
  * @param2[in]             : Pin number of GPIOx
- * @return                 : 0 or 1
+ * @return                 : Pin value of port is returned ( 0 or 1 )
  ************************************************************************************************************/
 uint8_t GPIO_ReadFromInputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber){
 
 	uint8_t value = 0;
 	value = (uint8_t)((pGPIOx->IDR >> PinNumber) & 0x00000001);
+	return value;
+}
+
+/************************************************************************************************************
+ * @fn                     : GPIO_ReadFromInputPort
+ * @brief                  : This function reads input port state
+ * @param1[in]             : Base address of GPIO_RegDef_t structure
+ * @param2[in]             : Pin number of GPIOx
+ * @return                 : Pins value of port are returned
+ ************************************************************************************************************/
+uint16_t GPIO_ReadFromInputPort(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber){
+	uint16_t value = 0;
+	value = (uint16_t)(pGPIOx->IDR);
 	return value;
 }
 
