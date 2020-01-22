@@ -28,6 +28,8 @@ int main (void){
 
 void GPIO_LedInit(void){
 	GPIO_Handle_t GPIO_Led;
+
+	/* This is led gpio configuration */
 	GPIO_Led.pGPIOx = GPIOD;                                   /* GPIOD base address    */
 	GPIO_Led.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_OUT;      /* GPIO pin mode         */
 	GPIO_Led.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_12;   /* GPIO pin no           */

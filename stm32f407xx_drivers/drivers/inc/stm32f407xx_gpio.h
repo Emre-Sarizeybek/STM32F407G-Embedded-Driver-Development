@@ -123,7 +123,10 @@ void GPIO_DeInit(GPIO_RegDef_t *pGPIOx);
  */
 void GPIO_ToggleOutputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber);
 
-
+/*
+ * This function reads input pin state
+ */
+uint8_t GPIO_ReadFromInputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber);
 
 
 
