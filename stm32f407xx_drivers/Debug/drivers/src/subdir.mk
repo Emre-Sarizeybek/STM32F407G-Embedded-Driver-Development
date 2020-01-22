@@ -4,17 +4,17 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../src/led_toggle.c 
+../drivers/src/stm32f407xx_gpio.c 
 
 OBJS += \
-./src/led_toggle.o 
+./drivers/src/stm32f407xx_gpio.o 
 
 C_DEPS += \
-./src/led_toggle.d 
+./drivers/src/stm32f407xx_gpio.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
-src/%.o: ../src/%.c
+drivers/src/%.o: ../drivers/src/%.c
 	@echo 'Building file: $<'
 	@echo 'Invoking: MCU GCC Compiler'
 	@echo $(PWD)

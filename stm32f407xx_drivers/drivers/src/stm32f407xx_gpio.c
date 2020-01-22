@@ -4,6 +4,7 @@
  *  Created on: 21 Jan 2020
  *      Author: Emre SARIZEYBEK
  */
+#include "stm32f407xx_gpio.h"
 #include "stm32f407xx.h"
 
 
@@ -102,32 +103,32 @@ void GPIO_Init(GPIO_Handle_t *pGPIOHandle){
 	GPIO_PeriClockControl(pGPIOHandle->pGPIOx, ENABLE); /* This function enables GPIOx peripheral clock */
 
 	/* 1. Configure the mode of gpio pin*/
-	if(pGPIOHandle->GPIO_PinConfig->GPIO_PinMode <= GPIO_MODE_ANALOG ){
-		tempreg = (pGPIOHandle->GPIO_PinConfig->GPIO_PinMode << (2*pGPIOHandle->GPIO_PinConfig->GPIO_PinNumber));
-		pGPIOHandle->pGPIOx->MODER &= ~( 0x3 << (2*pGPIOHandle->GPIO_PinConfig->GPIO_PinNumber)); /* Clearing */
+	if(pGPIOHandle->GPIO_PinConfig.GPIO_PinMode <= GPIO_MODE_ANALOG ){
+		tempreg = (pGPIOHandle->GPIO_PinConfig.GPIO_PinMode << (2*pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber));
+		pGPIOHandle->pGPIOx->MODER &= ~( 0x3 << (2*pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber)); /* Clearing */
 		pGPIOHandle->pGPIOx->MODER |= tempreg; /* Setting */
 	}
 
 	/* 2. Configure the speed of gpio pin*/
 	tempreg = 0;
-	tempreg = (pGPIOHandle->GPIO_PinConfig->GPIO_PinSpeed << (2* pGPIOHandle->GPIO_PinConfig->GPIO_PinNumber));
-	pGPIOHandle->pGPIOx->OSPEEDR &= ~(0x3 << (2*pGPIOHandle->GPIO_PinConfig->GPIO_PinNumber)); /* Clearing */
+	tempreg = (pGPIOHandle->GPIO_PinConfig.GPIO_PinSpeed << (2* pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber));
+	pGPIOHandle->pGPIOx->OSPEEDR &= ~(0x3 << (2*pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber)); /* Clearing */
 	pGPIOHandle->pGPIOx->OSPEEDR |= tempreg; /* Setting */
 
 	/* 3. Configure the PuPd settings */
 	tempreg = 0;
-	tempreg = (pGPIOHandle->GPIO_PinConfig->GPIO_PinPuPdControl << (2*pGPIOHandle->GPIO_PinConfig->GPIO_PinNumber));
-	pGPIOHandle->pGPIOx->PUPDR &= ~(0x3 << (2*pGPIOHandle->GPIO_PinConfig->GPIO_PinNumber)); /* Clearing */
+	tempreg = (pGPIOHandle->GPIO_PinConfig.GPIO_PinPuPdControl << (2*pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber));
+	pGPIOHandle->pGPIOx->PUPDR &= ~(0x3 << (2*pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber)); /* Clearing */
 	pGPIOHandle->pGPIOx->PUPDR |= tempreg; /* Setting */
 
 	/* 4. Configure the OpType */
 	tempreg = 0;
-	tempreg = (pGPIOHandle->GPIO_PinConfig->GPIO_PinOPType << (pGPIOHandle->GPIO_PinConfig->GPIO_PinNumber));
-	pGPIOHandle->pGPIOx->OTYPER &= ~(0x1 << pGPIOHandle->GPIO_PinConfig->GPIO_PinNumber); /* Clearing */
+	tempreg = (pGPIOHandle->GPIO_PinConfig.GPIO_PinOPType << (pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber));
+	pGPIOHandle->pGPIOx->OTYPER &= ~(0x1 << pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber); /* Clearing */
 	pGPIOHandle->pGPIOx->OTYPER |= tempreg; /* Setting */
 
 	/* 5. Configure the alt functionality */
-	if(pGPIOHandle->GPIO_PinConfig->GPIO_PinMode == GPIO_MODE_ALTFN ){
+	if(pGPIOHandle->GPIO_PinConfig.GPIO_PinMode == GPIO_MODE_ALTFN ){
 		uint8_t temp1, temp2;
 		temp1 = pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber / 8;
 		temp2 = pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber % 8;
