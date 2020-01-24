@@ -35,8 +35,8 @@ Project example application codes are as follows;
 
 # Note
 ## For other led_button.c and button_interrupt.c projects
-* Open the led_button.c and build the project then upload the code to your board.
-* Open the button_interrupt.c and build the project then upload the code to your board.
+* Open the led_button.c and build project then upload the code to your board.
+* Open the button_interrupt.c and build project then upload the code to your board.
 
 # Author
 Emre SARIZEYBEK
